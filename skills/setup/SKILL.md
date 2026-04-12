@@ -94,7 +94,19 @@ Walk through these sections one at a time. Ask naturally — this is a conversat
 Once all sections are complete:
 
 1. Confirm what was configured: "Here's what I set up: [summary]. Want to adjust anything?"
-2. Suggest: "Run `/open` to start your first real session. The vault is configured and I know your context."
+
+2. **Teach the session rhythm** — this is critical. Say something like:
+
+   > "One last thing — how Titus sessions work:
+   >
+   > **`/open`** — Run this at the start of every session. I'll load your context, check what's pending, and surface anything that needs attention. Takes a few seconds.
+   >
+   > **`/close`** — Run this at the end of every session. I'll save what happened, update the vault, and set up the next session so you never lose context.
+   >
+   > These two commands are the heartbeat of the system. `/open` boots me up with full awareness. `/close` makes sure nothing falls through the cracks. If you skip `/close`, the next session starts blind.
+   >
+   > Ready to go? Type `/open` to start your first real session."
+
 3. Note in `vault/memory/SESSION_LOG.md`: "Initial setup completed. System configured for [name]."
 
 ## Rules
