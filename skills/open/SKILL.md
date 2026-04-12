@@ -8,6 +8,14 @@ trigger: /open
 
 Run this at the start of every session.
 
+## First-Run Detection
+
+Before running the normal protocol, check `system/00_identity.md`. If it still contains "Replace this section with context about yourself" — the system is unconfigured. Say:
+
+> "Looks like this is your first session. Run `/setup` and I'll configure Titus to know who you are, what you're working on, and how you like to operate. Takes about 5 minutes."
+
+Do NOT run the normal /open protocol on an unconfigured system — there's nothing in the vault yet.
+
 ## Protocol
 
 1. **Read the latest daily note** — `vault/daily/` sorted by filename descending. This is last session's context.
