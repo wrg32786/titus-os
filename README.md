@@ -1,237 +1,247 @@
 <div align="center">
 
-# TITUS
+<img src="assets/banner.svg" alt="TITUS — AI Operating System" width="100%"/>
 
-### An AI Operating System for Claude Code
+<br/>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-blueviolet)](https://claude.ai/code)
-[![Obsidian](https://img.shields.io/badge/Obsidian-Vault_Native-7C3AED)](https://obsidian.md)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/wrg32786/titus-os/pulls)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-blueviolet?style=flat-square)](https://claude.ai/code)
+[![Obsidian](https://img.shields.io/badge/Obsidian-Vault_Native-7C3AED?style=flat-square)](https://obsidian.md)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-00d4aa?style=flat-square)](#-quick-start)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square)](https://github.com/wrg32786/titus-os/pulls)
 
-**15 markdown files. Zero dependencies. Drop in and run.**
+**Your AI doesn't just answer questions. It operates.**
 
-Turn Claude Code from a chatbot into a persistent strategic operator with identity, memory, authority boundaries, delegation protocols, and session continuity.
-
-[Quick Start](#-quick-start) · [Architecture](#-architecture) · [Key Concepts](#-key-concepts) · [Docs](docs/getting-started.md)
+[Quick Start](#-quick-start) · [Architecture](#-architecture) · [Key Concepts](#-key-concepts) · [Customize](#-make-it-yours) · [Docs](docs/getting-started.md)
 
 </div>
 
 ---
 
-## The Problem
+## What if your AI remembered everything?
 
-Every time you open Claude Code, you start from scratch. No memory of yesterday. No awareness of your priorities. No understanding of what it should and shouldn't decide on its own. You re-explain context, re-establish boundaries, and hope it remembers what matters.
+Every priority. Every decision. Every conversation thread left open from last week. What if it knew exactly what it was allowed to decide on its own — and what to bring to you? What if it could delegate to faster, cheaper agents for grunt work while it stayed focused on strategy?
 
-**Titus fixes this.** It's a complete operating system layer that gives your AI agent:
+That's Titus. **15 markdown files that turn Claude Code into a persistent operating system.**
 
-| | Without Titus | With Titus |
-|---|---|---|
-| **Memory** | Gone every session | Obsidian vault persists everything |
-| **Identity** | Generic assistant | Defined role, values, optimization targets |
-| **Authority** | Does whatever you ask | Knows what it can decide alone vs. what needs you |
-| **Continuity** | "Let me start from scratch..." | `/open` loads full context in seconds |
-| **Delegation** | One agent does everything | Routes to sub-agents by task type and model |
-| **Cost** | Frontier model for everything | Smart routing saves 60-80% on tokens |
+No database. No server. No build step. Drop the files in, open a session, and your AI boots up knowing who it is, what it's working on, and what matters today.
+
+```
+You: /open
+Titus: 3 open threads from yesterday. Delegation tracker has 2 items pending review.
+       Priority 1 is blocked — surfacing now. What do you want to hit?
+```
 
 ---
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- [Claude Code](https://claude.ai/code) (CLI, desktop, or IDE extension)
-- [Obsidian](https://obsidian.md/) (free)
-- Node.js 18+ (for hooks and semantic search)
-
-### Install
+## ⚡ Quick Start
 
 ```bash
-git clone https://github.com/wrg32786/titus-os.git
-cd titus-os
-
-# Optional: semantic search (local embeddings, no API calls)
-cd daemons/semantic-search && npm install && cd ../..
+git clone https://github.com/wrg32786/titus-os.git && cd titus-os
 ```
 
-### Configure
+That's it. Open the folder in Claude Code. The CLAUDE.md loads automatically.
 
-1. Copy hooks from `.claude/settings.json.template` into your Claude Code settings
-2. Open the `vault/` folder in Obsidian
-3. Edit `system/00_identity.md` — tell it who you are
-4. Run Claude Code in the titus-os directory — Titus is active
+**Optional add-ons:**
+```bash
+# Semantic search (local AI embeddings — no API calls, fully private)
+cd daemons/semantic-search && npm install && node embed-vault.js && cd ../..
 
-See the full [Getting Started Guide](docs/getting-started.md).
+# Wire hooks into Claude Code settings (auto-capture, token tracking, session summaries)
+# Copy from .claude/settings.json.template → your ~/.claude/settings.json
+```
+
+Open `vault/` in [Obsidian](https://obsidian.md) to see the knowledge graph. Full walkthrough in [Getting Started](docs/getting-started.md).
 
 ---
 
 ## 🏗 Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                         YOU (Principal)                       │
-│                              │                               │
-│                              ▼                               │
-│                    ┌──────────────────┐                      │
-│                    │      TITUS       │                      │
-│                    │  Strategy Layer  │                      │
-│                    │  Routes, decides,│                      │
-│                    │  delegates, logs │                      │
-│                    └────────┬─────────┘                      │
-│                             │                                │
-│              ┌──────────────┼──────────────┐                │
-│              ▼              ▼              ▼                │
-│     ┌──────────────┐ ┌───────────┐ ┌────────────┐         │
-│     │   Research   │ │ Execution │ │  Creative  │         │
-│     │  (fast model)│ │(mid model)│ │(mid model) │         │
-│     └──────────────┘ └───────────┘ └────────────┘         │
-│                                                             │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │                   OBSIDIAN VAULT                       │ │
-│  │  daily/ · memory/ · concepts/ · projects/ · agents/    │ │
-│  │  Wikilinks │ Graph View │ Session Logs │ Templates     │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │                   CLAUDE CODE HOOKS                    │ │
-│  │  Auto-Capture │ Token Tracking │ Semantic Search       │ │
-│  └────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+                        ┌─────────────┐
+                        │     YOU     │
+                        └──────┬──────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │       T I T U S     │
+                    │                     │
+                    │  Thinks. Routes.    │
+                    │  Remembers.         │
+                    │  Decides (or asks). │
+                    └──┬──────┬───────┬──┘
+                       │      │       │
+              ┌────────▼┐  ┌──▼────┐  ┌▼────────┐
+              │ Research │  │ Build │  │Creative │
+              │   ⚡     │  │  🔧   │  │   🎨    │
+              │  haiku   │  │sonnet │  │ sonnet  │
+              └─────────┘  └───────┘  └─────────┘
+
+   ┌──────────────────────────────────────────────────┐
+   │              OBSIDIAN VAULT (The Brain)           │
+   │                                                    │
+   │  📅 daily/      Session logs, auto-captured        │
+   │  🧠 memory/     Priorities, decisions, delegation  │
+   │  💡 concepts/   Architecture, domain knowledge     │
+   │  📁 projects/   One note per active project        │
+   │  👤 people/     Key people and context             │
+   │  🤖 agents/     Agent profiles and capabilities    │
+   │                                                    │
+   │  Everything linked. Everything searchable.         │
+   │  Everything yours to read.                         │
+   └──────────────────────────────────────────────────┘
 ```
 
-### The 15 System Documents
+### 15 System Documents — The Operating Kernel
 
-| # | Document | Purpose |
-|:---:|----------|---------|
-| `00` | **Identity** | Who the agent is, what it optimizes for |
-| `01` | **Ethos** | Core values, rejected behaviors |
-| `02` | **Operating Standards** | 15 non-negotiable principles |
-| `03` | **Roles & Scope** | Agent hierarchy and routing rules |
-| `04` | **Decision Frameworks** | 12 evaluation lenses |
-| `05` | **Delegation Protocol** | Structured brief template |
-| `06` | **Sub-Agent Interface** | Communication standards |
-| `07` | **Time Management** | Calendar protection, daily/weekly rhythm |
-| `08` | **Financial Thinking** | Revenue, profit, cash flow, payback evaluation |
-| `09` | **Sub-Agent Manifest** | When to create agents (and when not to) |
-| `10` | **Memory & Learning** | Pattern tracking, institutional memory |
-| `11` | **Session Rhythm** | `/open` → work → `/close` lifecycle |
-| `12` | **Authority Matrix** | What AI decides alone vs. needs approval |
-| `13` | **Memory Operating Layer** | Vault architecture, staleness rules |
-| `14` | **Decision Framework** | YOUR personal decision logic (customize this) |
+These aren't prompts. They're a **complete operating manual** that tells the AI how to think, decide, delegate, remember, and manage your time.
 
-### Hooks
+| | Document | What It Gives Your AI |
+|:---:|----------|----------------------|
+| `00` | **Identity** | Knows who it is and what it optimizes for |
+| `01` | **Ethos** | Won't sugarcoat, won't hedge, won't waste your time |
+| `02` | **Operating Standards** | 15 rules it follows without being told |
+| `03` | **Roles & Scope** | Routes work to the right agent automatically |
+| `04` | **Decision Frameworks** | 12 lenses for evaluating any opportunity |
+| `05` | **Delegation Protocol** | Structured briefs — no sloppy handoffs |
+| `06` | **Sub-Agent Interface** | Clean communication up and down the chain |
+| `07` | **Time Management** | Protects your calendar like a chief of staff should |
+| `08` | **Financial Thinking** | Revenue, profit, cash flow — not vibes |
+| `09` | **Sub-Agent Manifest** | Creates specialists only when it creates leverage |
+| `10` | **Memory & Learning** | Gets smarter every session. Tracks patterns. Learns from mistakes. |
+| `11` | **Session Rhythm** | `/open` → work → `/close` — nothing falls through cracks |
+| `12` | **Authority Matrix** | Knows its lane. Asks when it should. Acts when it can. |
+| `13` | **Memory Layer** | 4-tier vault architecture with staleness rules |
+| `14` | **Your Decision Logic** | YOUR brain encoded — customize this completely |
 
-| Hook | Trigger | What It Does |
-|------|---------|-------------|
-| `auto-capture.sh` | PostToolUse | Logs actions to daily note automatically |
-| `session-capture-summary.sh` | Stop | Session stats: actions, tools, files touched |
-| `log-token-usage.sh` | Stop | Token spend + estimated cost per session |
-| `suggest-compact.sh` | PostToolUse | Context management reminder |
-| `session-end-check.sh` | Stop | Reminds to run `/close` |
+### Hooks — The Nervous System
 
-### Semantic Search
+Runs silently in the background. You don't think about it.
 
-Local embeddings using `all-MiniLM-L6-v2`. **No API calls. No data leaves your machine.**
+| Hook | What It Does |
+|------|-------------|
+| **Auto-Capture** | Every action logged to your daily note. Automatic. |
+| **Session Summary** | Actions, tools, files touched — stats at session end |
+| **Token Tracker** | Cost per session, cumulative spend, logged to vault |
+| **Compact Suggest** | Nudges context management before you hit limits |
+| **Close Reminder** | Never forgets to commit memory |
+
+### Semantic Search — The Recall System
+
+Your vault, searchable by meaning. Not keywords — meaning.
 
 ```bash
-node daemons/semantic-search/search-vault.js "what did we decide about pricing"
+$ node daemons/semantic-search/search-vault.js "what did we decide about pricing"
+
+  1. [0.89] concepts/Pricing Strategy.md — "Freemium with usage-based upgrade..."
+  2. [0.76] memory/DECISION_LOG.md — "2026-03-15: Set launch price at $49/mo..."
+  3. [0.71] projects/SaaS Launch.md — "Pricing must clear $40 to cover CAC..."
 ```
+
+Runs locally. `all-MiniLM-L6-v2` on your machine. **No API calls. No data leaves your device.**
 
 ---
 
 ## 🔑 Key Concepts
 
-### Authority Matrix
+### The Authority Matrix
 
-The most important document in the system. Three levels:
+Your AI shouldn't need permission for everything. But it shouldn't decide everything either.
 
 ```
-┌─────────────────────────────────────────────┐
-│  LEVEL 1 — AUTONOMOUS                       │
-│  Agent decides and acts. No confirmation.    │
-│  Reading, organizing, research, formatting   │
-├─────────────────────────────────────────────┤
-│  LEVEL 2 — RECOMMEND & CONFIRM              │
-│  Agent analyzes and proposes. You approve.   │
-│  Strategy, delegation, external comms        │
-├─────────────────────────────────────────────┤
-│  LEVEL 3 — HUMAN ONLY                       │
-│  Agent provides analysis. Never acts.        │
-│  Money, legal, hiring, irreversible moves    │
-└─────────────────────────────────────────────┘
+╔══════════════════════════════════════════════════════╗
+║  LEVEL 1 · AUTONOMOUS                               ║
+║  Research. Organize. Format. Route.                  ║
+║  → It just handles it.                               ║
+╠══════════════════════════════════════════════════════╣
+║  LEVEL 2 · RECOMMEND & CONFIRM                      ║
+║  Strategy. Delegation. External comms.               ║
+║  → It proposes. You approve.                         ║
+╠══════════════════════════════════════════════════════╣
+║  LEVEL 3 · HUMAN ONLY                               ║
+║  Money. Legal. Hiring. Irreversible moves.           ║
+║  → It briefs you. You decide.                        ║
+╚══════════════════════════════════════════════════════╝
 ```
 
-Every task gets classified into one of four routes: **Do** → **Delegate** → **Recommend** → **Escalate**
+Every incoming task → **Do** · **Delegate** · **Recommend** · **Escalate**
+
+The AI classifies in milliseconds. No ambiguity. No overreach.
 
 ### Vault as Brain
 
-The Obsidian vault replaces traditional RAG and vector databases:
+Forget vector databases. Your AI's memory is an **Obsidian vault** — the same tool you can open, read, search, and navigate yourself.
 
-- **Human-navigable** — Open Obsidian, read everything. No hidden database.
-- **Graph structure** — Wikilinks create a knowledge graph. Backlinks surface connections.
-- **Session continuity** — `/open` loads context. `/close` commits changes. Nothing is lost.
-- **Zero infrastructure** — No database, no server. Just markdown files in a folder.
+- **Wikilinks** create a knowledge graph. `[[Project Alpha]]` connects to `[[People/Jane]]` connects to `[[Decision Log]]`. The graph IS the intelligence.
+- **Session continuity** without magic. `/open` reads the vault. `/close` writes to it. Everything persists. Everything is auditable.
+- **Human-first.** You can read every thought your AI has ever had. No hidden embeddings. No opaque database. Markdown files in a folder.
 
-### Model Routing
+### Model Routing — Smart Spend
 
-Not every task needs your most expensive model:
+Why burn frontier tokens on reading a file?
 
-```
-Fast (haiku)     → Reads, context loading, status checks
-Mid (sonnet)     → Writing, execution, research
-Frontier (opus)  → Strategy, architecture, complex judgment
-```
+| Task | Model | Cost |
+|------|-------|------|
+| Read files, load context | ⚡ Fast | ~$0.001 |
+| Write code, draft content | 🔧 Mid | ~$0.01 |
+| Strategy, complex judgment | 🧠 Frontier | ~$0.10 |
 
-**Result:** 60-80% token cost reduction without quality loss.
-
----
-
-## 🎨 Customize
-
-Titus is opinionated but designed to be forked:
-
-1. `system/00_identity.md` — Define who your agent is
-2. `system/14_decision_framework.md` — Your personal decision logic
-3. `system/12_authority_matrix.md` — Set your authority boundaries
-4. `vault/` — Add your projects, people, and context
-5. `.claude/settings.json.template` — Wire the hooks
-
-Works out of the box with examples. Customize as you learn your rhythm.
+**Titus routes automatically.** Same quality output. 60-80% lower cost.
 
 ---
 
-## ❌ What This Is NOT
+## 🎨 Make It Yours
 
-| | |
-|---|---|
-| **Not a chatbot personality** | Operational infrastructure, not a persona prompt |
-| **Not a code framework** | No build step. Markdown files. Drop and run. |
-| **Not a RAG system** | Vault is human-readable. Vector search is optional. |
-| **Not another LangChain** | For principals (founders, operators), not developers building pipelines |
+Titus is opinionated but built to be forked.
+
+**Start here (10 minutes):**
+1. `system/00_identity.md` — Tell it who you are
+2. `system/14_decision_framework.md` — Encode how YOU make decisions
+3. `system/12_authority_matrix.md` — Set boundaries that match YOUR risk tolerance
+
+**Then build over time:**
+- Add your projects to `vault/projects/`
+- Add your people to `vault/people/`
+- Drop concepts into `vault/concepts/`
+- The vault grows with every session. It compounds.
+
+---
+
+## ❌ What This Isn't
+
+**Not a chatbot skin.** No personality prompts. No "you are a helpful assistant." This is operational infrastructure.
+
+**Not a code framework.** No `npm install`. No Python environment. No build step. It's 15 markdown files.
+
+**Not a RAG system.** The vault is human-readable by design. You don't need an AI to search your AI's memory — just open Obsidian.
+
+**Not another agent framework.** LangChain and CrewAI are for developers building pipelines. Titus is for **principals** — founders, executives, operators — who want an AI that actually operates.
 
 ---
 
 ## 🤝 Contributing
 
-PRs welcome. Highest-value contributions:
+PRs welcome. The highest-value contributions:
 
-- New decision framework lenses for `system/04`
+- Decision framework lenses for new domains
 - Hook scripts for additional Claude Code events
-- Vault templates for specific domains (engineering, consulting, creative, legal)
-- Integration guides for other tools (Notion, Linear, Slack, n8n)
-
----
-
-## 📄 License
-
-[MIT](LICENSE) — use it however you want.
+- Vault templates (engineering, legal, consulting, creative)
+- Integration guides (Notion, Linear, Slack, n8n, Make)
 
 ---
 
 <div align="center">
 
-Built by [Will Gwyn](https://github.com/wrg32786). Battle-tested across multiple ventures over months of daily use.
+### 📄 [MIT License](LICENSE) — Use it however you want.
 
-**The framework emerged from real operational needs — not theory.**
+<br/>
+
+Built by **[Will Gwyn](https://github.com/wrg32786)**
+
+*Battle-tested across multiple ventures. Months of daily use.*
+*This framework emerged from real operational needs — not theory.*
+
+<br/>
+
+**If this saves you time, star the repo. That's all the thanks needed.**
 
 </div>
