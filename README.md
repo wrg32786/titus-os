@@ -36,26 +36,15 @@ Titus: 3 open threads from yesterday. Delegation tracker has 2 items pending rev
 
 ## ⚡ Quick Start
 
-### One-line install:
+### Install into your current project:
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/wrg32786/titus-os/main/install.sh)
 ```
 
-### Or manually:
+That's it. Titus installs into whatever directory you're in — your existing project, your home folder, wherever you work. No new directory to switch to.
 
-```bash
-git clone https://github.com/wrg32786/titus-os.git
-cd titus-os
-```
-
-### Then open Claude Code in the titus-os directory:
-
-```bash
-cd ~/titus-os && claude
-```
-
-**That's it.** Titus detects the fresh install, greets you, and walks you through setup. You don't need to read any docs — just start talking. The AI configures itself through conversation in about 5 minutes.
+**Start a new Claude Code conversation** (or just keep talking). Titus detects the fresh install, greets you, and walks you through setup. No docs to read — just start talking. The AI configures itself through conversation in about 5 minutes.
 
 After setup, every session works like this:
 - **Start:** `/open` — Titus boots with full context from last session
