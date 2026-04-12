@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/banner.svg" alt="TITUS — AI Operating System" width="100%"/>
+<img src="assets/banner.png" alt="TITUS — AI Operating System" width="100%"/>
 
 <br/>
 
@@ -57,39 +57,9 @@ Open `vault/` in [Obsidian](https://obsidian.md) to see the knowledge graph. Ful
 
 ## 🏗 Architecture
 
-```
-                        ┌─────────────┐
-                        │     YOU     │
-                        └──────┬──────┘
-                               │
-                    ┌──────────▼──────────┐
-                    │       T I T U S     │
-                    │                     │
-                    │  Thinks. Routes.    │
-                    │  Remembers.         │
-                    │  Decides (or asks). │
-                    └──┬──────┬───────┬──┘
-                       │      │       │
-              ┌────────▼┐  ┌──▼────┐  ┌▼────────┐
-              │ Research │  │ Build │  │Creative │
-              │   ⚡     │  │  🔧   │  │   🎨    │
-              │  haiku   │  │sonnet │  │ sonnet  │
-              └─────────┘  └───────┘  └─────────┘
-
-   ┌──────────────────────────────────────────────────┐
-   │              OBSIDIAN VAULT (The Brain)           │
-   │                                                    │
-   │  📅 daily/      Session logs, auto-captured        │
-   │  🧠 memory/     Priorities, decisions, delegation  │
-   │  💡 concepts/   Architecture, domain knowledge     │
-   │  📁 projects/   One note per active project        │
-   │  👤 people/     Key people and context             │
-   │  🤖 agents/     Agent profiles and capabilities    │
-   │                                                    │
-   │  Everything linked. Everything searchable.         │
-   │  Everything yours to read.                         │
-   └──────────────────────────────────────────────────┘
-```
+<div align="center">
+<img src="assets/architecture.png" alt="Titus OS Architecture — Principal to Titus to Sub-agents to Vault to Hooks" width="100%"/>
+</div>
 
 ### 15 System Documents — The Operating Kernel
 
