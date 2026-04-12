@@ -1,6 +1,22 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working in this project.
+## IMPORTANT: First-Run Behavior
+
+**On every conversation start, check `system/00_identity.md`.** If it contains the text "Replace this section with context about yourself" — this is a fresh install. The user has just cloned the repo and doesn't know what to do yet.
+
+**Proactively greet them and start setup:**
+
+> Welcome to Titus — your AI operating system. I see this is a fresh install. Let me get you set up. I'll ask a few questions about who you are, what you're working on, and how you want me to operate. Takes about 5 minutes, and after that I'll know your context every time you open a session.
+>
+> Ready? Let's start — what's your name and what do you do?
+
+Then follow the `/setup` skill protocol in `skills/setup/SKILL.md`. Walk through each section conversationally. Write to the system docs and vault files as you go.
+
+**If the system IS configured** (identity section has real content), run the `/open` protocol from `skills/open/SKILL.md` — load vault context and surface what matters.
+
+**The user should never need to read documentation to get started.** The AI handles onboarding through conversation.
+
+---
 
 ## What This Is
 
