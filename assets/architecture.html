@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200, initial-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Orbitron:wght@400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 720px;
+    overflow: hidden;
+    background: #0a0a0f;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .diagram {
+    position: relative;
+    width: 1200px;
+    height: 720px;
+    overflow: hidden;
+  }
+
+  /* Subtle grid background */
+  .diagram::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(59,130,246,0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: radial-gradient(ellipse 700px 500px at 50% 45%, black 10%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 700px 500px at 50% 45%, black 10%, transparent 70%);
+  }
+
+  /* Title */
+  .diagram-title {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  /* Flow node base */
+  .flow-node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid;
+  }
+
+  /* YOU node */
+  .node-you {
+    top: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 56px;
+    background: rgba(0,212,170,0.06);
+    border-color: rgba(0,212,170,0.3);
+    box-shadow: 0 0 20px rgba(0,212,170,0.05);
+  }
+  .node-you .node-label {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 6px;
+    color: #00d4aa;
+  }
+  .node-you .node-sub {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: rgba(0,212,170,0.5);
+    margin-top: 2px;
+  }
+
+  /* TITUS core node */
+  .node-titus {
+    top: 188px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 90px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+    border-color: rgba(59,130,246,0.35);
+    box-shadow:
+      0 0 30px rgba(59,130,246,0.06),
+      0 0 60px rgba(139,92,246,0.03),
+      inset 0 0 30px rgba(59,130,246,0.03);
+    border-radius: 10px;
+  }
+  .node-titus .node-label {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 26px;
+    letter-spacing: 12px;
+    padding-left: 12px;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(59,130,246,0.3);
+  }
+  .node-titus .node-sub {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(139,92,246,0.6);
+    margin-top: 4px;
+  }
+  .node-titus .node-model {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: rgba(59,130,246,0.4);
+    margin-top: 2px;
+  }
+
+  /* Sub-agent nodes */
+  .node-agent {
+    top: 350px;
+    width: 180px;
+    height: 72px;
+    background: rgba(59,130,246,0.04);
+    border-color: rgba(59,130,246,0.2);
+  }
+  .node-agent .node-icon {
+    font-size: 16px;
+    margin-bottom: 3px;
+  }
+  .node-agent .node-label {
+    font-family: 'Orbitron', monospace;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.8);
+  }
+  .node-agent .node-sub {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: rgba(59,130,246,0.45);
+    margin-top: 2px;
+  }
+  .agent-research { left: 200px; }
+  .agent-build { left: 510px; }
+  .agent-creative { left: 820px; }
+
+  .agent-research { border-color: rgba(0,212,170,0.2); background: rgba(0,212,170,0.04); }
+  .agent-research .node-sub { color: rgba(0,212,170,0.45); }
+
+  .agent-build { border-color: rgba(59,130,246,0.25); background: rgba(59,130,246,0.05); }
+
+  .agent-creative { border-color: rgba(139,92,246,0.2); background: rgba(139,92,246,0.04); }
+  .agent-creative .node-sub { color: rgba(139,92,246,0.45); }
+
+  /* Vault node */
+  .node-vault {
+    top: 490px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 620px;
+    height: 90px;
+    background: linear-gradient(90deg, rgba(59,130,246,0.04), rgba(139,92,246,0.04));
+    border-color: rgba(139,92,246,0.2);
+    border-radius: 10px;
+    flex-direction: row;
+    gap: 0;
+  }
+  .vault-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+  }
+  .vault-center .node-label {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,0.85);
+    padding-left: 5px;
+  }
+  .vault-center .node-sub {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: rgba(139,92,246,0.5);
+    margin-top: 3px;
+  }
+  .vault-items {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 20px;
+  }
+  .vault-item {
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.25);
+    padding: 3px 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 3px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* Hooks node */
+  .node-hooks {
+    top: 640px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480px;
+    height: 52px;
+    background: rgba(255,165,0,0.03);
+    border-color: rgba(255,165,0,0.15);
+    flex-direction: row;
+    gap: 24px;
+  }
+  .hooks-label {
+    font-family: 'Orbitron', monospace;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(255,165,0,0.6);
+  }
+  .hooks-items {
+    display: flex;
+    gap: 12px;
+  }
+  .hook-item {
+    font-size: 7px;
+    letter-spacing: 1px;
+    color: rgba(255,165,0,0.3);
+    padding: 2px 6px;
+    border: 1px solid rgba(255,165,0,0.1);
+    border-radius: 2px;
+  }
+
+  /* Connection arrows - using SVG overlay */
+  .connections {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Arrow labels */
+  .arrow-label {
+    position: absolute;
+    font-size: 7px;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+  }
+
+  /* Side annotations */
+  .annotation {
+    position: absolute;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.1);
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+  .annotation-left { left: 50px; top: 50%; transform: translateY(-50%) rotate(180deg); }
+  .annotation-right { right: 50px; top: 50%; transform: translateY(-50%); }
+</style>
+</head>
+<body>
+<div class="diagram">
+  <div class="diagram-title">System Architecture</div>
+
+  <!-- SVG Connections -->
+  <svg class="connections" width="1200" height="720" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="grad-blue-purple" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.4"/>
+        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.2"/>
+      </linearGradient>
+      <linearGradient id="grad-green-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#00d4aa;stop-opacity:0.35"/>
+        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.2"/>
+      </linearGradient>
+      <linearGradient id="grad-purple-down" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.25"/>
+        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.1"/>
+      </linearGradient>
+      <linearGradient id="grad-vault-hooks" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.15"/>
+        <stop offset="100%" style="stop-color:#ffa500;stop-opacity:0.15"/>
+      </linearGradient>
+      <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <path d="M 0 0 L 8 3 L 0 6 Z" fill="rgba(59,130,246,0.35)"/>
+      </marker>
+      <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <path d="M 0 0 L 8 3 L 0 6 Z" fill="rgba(0,212,170,0.3)"/>
+      </marker>
+      <marker id="arrow-purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <path d="M 0 0 L 8 3 L 0 6 Z" fill="rgba(139,92,246,0.25)"/>
+      </marker>
+      <marker id="arrow-orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <path d="M 0 0 L 8 3 L 0 6 Z" fill="rgba(255,165,0,0.2)"/>
+      </marker>
+    </defs>
+
+    <!-- YOU → TITUS -->
+    <line x1="600" y1="128" x2="600" y2="188" stroke="url(#grad-green-blue)" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+
+    <!-- TITUS → Research -->
+    <line x1="510" y1="278" x2="310" y2="350" stroke="url(#grad-blue-purple)" stroke-width="1" marker-end="url(#arrow-blue)"/>
+    <!-- TITUS → Build -->
+    <line x1="600" y1="278" x2="600" y2="350" stroke="url(#grad-blue-purple)" stroke-width="1" marker-end="url(#arrow-blue)"/>
+    <!-- TITUS → Creative -->
+    <line x1="690" y1="278" x2="890" y2="350" stroke="url(#grad-blue-purple)" stroke-width="1" marker-end="url(#arrow-blue)"/>
+
+    <!-- Research → Vault -->
+    <line x1="290" y1="422" x2="420" y2="490" stroke="url(#grad-purple-down)" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arrow-purple)"/>
+    <!-- Build → Vault -->
+    <line x1="600" y1="422" x2="600" y2="490" stroke="url(#grad-purple-down)" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arrow-purple)"/>
+    <!-- Creative → Vault -->
+    <line x1="910" y1="422" x2="780" y2="490" stroke="url(#grad-purple-down)" stroke-width="1" stroke-dasharray="4,4" marker-end="url(#arrow-purple)"/>
+
+    <!-- Vault → Hooks -->
+    <line x1="600" y1="580" x2="600" y2="640" stroke="url(#grad-vault-hooks)" stroke-width="1" marker-end="url(#arrow-orange)"/>
+
+    <!-- Vault feedback loop to TITUS (curved) -->
+    <path d="M 290 535 Q 120 380 440 233" stroke="rgba(139,92,246,0.12)" stroke-width="1" fill="none" stroke-dasharray="3,6" marker-end="url(#arrow-purple)"/>
+    <text x="135" y="370" font-family="JetBrains Mono" font-size="7" letter-spacing="1" fill="rgba(139,92,246,0.2)" transform="rotate(-60, 135, 370)">MEMORY RECALL</text>
+  </svg>
+
+  <!-- Arrow labels -->
+  <div class="arrow-label" style="top:155px; left:612px;">directs</div>
+  <div class="arrow-label" style="top:308px; left:395px;">delegates</div>
+  <div class="arrow-label" style="top:308px; right:365px;">delegates</div>
+  <div class="arrow-label" style="top:450px; left:612px;">writes</div>
+  <div class="arrow-label" style="top:607px; left:612px;">triggers</div>
+
+  <!-- Flow nodes -->
+  <div class="flow-node node-you">
+    <div class="node-label">YOU</div>
+    <div class="node-sub">principal</div>
+  </div>
+
+  <div class="flow-node node-titus">
+    <div class="node-label">TITUS</div>
+    <div class="node-sub">think &middot; route &middot; remember &middot; decide</div>
+    <div class="node-model">claude opus &middot; frontier</div>
+  </div>
+
+  <div class="flow-node node-agent agent-research">
+    <div class="node-icon">&#9889;</div>
+    <div class="node-label">RESEARCH</div>
+    <div class="node-sub">haiku &middot; fast</div>
+  </div>
+
+  <div class="flow-node node-agent agent-build">
+    <div class="node-icon">&#128295;</div>
+    <div class="node-label">BUILD</div>
+    <div class="node-sub">sonnet &middot; mid</div>
+  </div>
+
+  <div class="flow-node node-agent agent-creative">
+    <div class="node-icon">&#127912;</div>
+    <div class="node-label">CREATIVE</div>
+    <div class="node-sub">sonnet &middot; mid</div>
+  </div>
+
+  <div class="flow-node node-vault">
+    <div class="vault-center">
+      <div class="node-label">VAULT</div>
+      <div class="node-sub">obsidian &middot; the brain</div>
+    </div>
+    <div class="vault-items">
+      <div class="vault-item">daily/</div>
+      <div class="vault-item">memory/</div>
+      <div class="vault-item">concepts/</div>
+      <div class="vault-item">projects/</div>
+      <div class="vault-item">people/</div>
+      <div class="vault-item">agents/</div>
+    </div>
+  </div>
+
+  <div class="flow-node node-hooks">
+    <div class="hooks-label">HOOKS</div>
+    <div class="hooks-items">
+      <div class="hook-item">auto-capture</div>
+      <div class="hook-item">session-summary</div>
+      <div class="hook-item">token-tracker</div>
+      <div class="hook-item">close-remind</div>
+    </div>
+  </div>
+
+  <!-- Side annotations -->
+  <div class="annotation annotation-left">the nervous system</div>
+  <div class="annotation annotation-right">persistent memory</div>
+</div>
+</body>
+</html>
