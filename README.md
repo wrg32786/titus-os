@@ -115,27 +115,9 @@ Runs locally. `all-MiniLM-L6-v2` on your machine. **No API calls. No data leaves
 
 ### The Authority Matrix
 
-Your AI shouldn't need permission for everything. But it shouldn't decide everything either.
-
-```
-╔══════════════════════════════════════════════════════╗
-║  LEVEL 1 · AUTONOMOUS                               ║
-║  Research. Organize. Format. Route.                  ║
-║  → It just handles it.                               ║
-╠══════════════════════════════════════════════════════╣
-║  LEVEL 2 · RECOMMEND & CONFIRM                      ║
-║  Strategy. Delegation. External comms.               ║
-║  → It proposes. You approve.                         ║
-╠══════════════════════════════════════════════════════╣
-║  LEVEL 3 · HUMAN ONLY                               ║
-║  Money. Legal. Hiring. Irreversible moves.           ║
-║  → It briefs you. You decide.                        ║
-╚══════════════════════════════════════════════════════╝
-```
-
-Every incoming task → **Do** · **Delegate** · **Recommend** · **Escalate**
-
-The AI classifies in milliseconds. No ambiguity. No overreach.
+<div align="center">
+<img src="assets/authority-matrix.png" alt="The Authority Matrix — Level 1 Autonomous, Level 2 Recommend & Confirm, Level 3 Human Only" width="100%"/>
+</div>
 
 ### Vault as Brain
 
