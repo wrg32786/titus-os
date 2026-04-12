@@ -36,22 +36,33 @@ Titus: 3 open threads from yesterday. Delegation tracker has 2 items pending rev
 
 ## ⚡ Quick Start
 
+### One-line install:
+
 ```bash
-git clone https://github.com/wrg32786/titus-os.git && cd titus-os
+bash <(curl -s https://raw.githubusercontent.com/wrg32786/titus-os/main/install.sh)
 ```
 
-That's it. Open the folder in Claude Code. The CLAUDE.md loads automatically.
+### Or manually:
 
-**Optional add-ons:**
 ```bash
-# Semantic search (local AI embeddings — no API calls, fully private)
-cd daemons/semantic-search && npm install && node embed-vault.js && cd ../..
-
-# Wire hooks into Claude Code settings (auto-capture, token tracking, session summaries)
-# Copy from .claude/settings.json.template → your ~/.claude/settings.json
+git clone https://github.com/wrg32786/titus-os.git
+cd titus-os
 ```
 
-Open `vault/` in [Obsidian](https://obsidian.md) to see the knowledge graph. Full walkthrough in [Getting Started](docs/getting-started.md).
+### Then open Claude Code in the titus-os directory:
+
+```bash
+cd ~/titus-os && claude
+```
+
+**That's it.** Titus detects the fresh install, greets you, and walks you through setup. You don't need to read any docs — just start talking. The AI configures itself through conversation in about 5 minutes.
+
+After setup, every session works like this:
+- **Start:** `/open` — Titus boots with full context from last session
+- **Work:** Just talk. Titus handles routing, memory, delegation.
+- **End:** `/close` — Saves everything. Next session picks up exactly where you left off.
+
+**Optional:** Open the `vault/` folder in [Obsidian](https://obsidian.md) to see and navigate your AI's knowledge graph visually. Full walkthrough in [Getting Started](docs/getting-started.md).
 
 ---
 
