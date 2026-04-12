@@ -1,0 +1,43 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash TITUS_ROOT/hooks/suggest-compact.sh",
+            "timeout": 1000
+          },
+          {
+            "type": "command",
+            "command": "bash TITUS_ROOT/hooks/auto-capture.sh",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash TITUS_ROOT/hooks/session-capture-summary.sh",
+            "timeout": 3000
+          },
+          {
+            "type": "command",
+            "command": "bash TITUS_ROOT/hooks/session-end-check.sh",
+            "timeout": 2000
+          },
+          {
+            "type": "command",
+            "command": "bash TITUS_ROOT/hooks/log-token-usage.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}
