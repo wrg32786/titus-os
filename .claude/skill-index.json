@@ -1,0 +1,10 @@
+[
+  {"name": "open", "triggers": ["start session", "begin work", "load context", "session start", "new session", "boot up", "what did we leave off"], "why": "Start session, load vault context, surface open threads and priorities"},
+  {"name": "close", "triggers": ["end session", "wrap up", "commit memory", "session close", "end of session", "save session", "close out"], "why": "End session, commit memory, write daily note + SESSION_LOG entry"},
+  {"name": "brief", "triggers": ["write a brief", "delegate to", "create a brief", "hand off this work", "assign this to", "task brief", "handoff brief"], "why": "Generate a structured delegation brief for a sub-agent"},
+  {"name": "decide", "triggers": ["should I", "evaluate this opportunity", "help me decide", "decision framework", "is this worth doing", "go or no-go", "run the lenses"], "why": "Run a decision through the 12-lens evaluation framework"},
+  {"name": "setup", "triggers": ["first time setup", "configure Titus", "new installation", "initialize Titus", "just cloned"], "why": "First-run interview that configures Titus for a new user"},
+  {"name": "deep-recon", "triggers": ["deep recon", "brainstorm deeply", "explore ideas from multiple angles", "multi-angle analysis", "reconnaissance", "investigate topic", "research document"], "why": "Multi-agent reconnaissance (Explorer/Associator/Critic/Synthesizer)"},
+  {"name": "semantic-search", "triggers": ["find notes about", "search vault by meaning", "what notes relate to", "vault search", "find related notes", "semantic search"], "why": "Vault search by meaning via local embeddings"},
+  {"name": "caddy-enroll", "triggers": ["enroll this skill", "add to Caddy", "update Caddy for", "add skill to index", "caddy enroll", "register new skill", "add to golf bag"], "why": "Add a new skill to Caddy's index so it can be surfaced by prompt match"}
+]

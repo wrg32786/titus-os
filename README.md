@@ -139,6 +139,26 @@ Why burn frontier tokens on reading a file?
 
 **Titus routes automatically.** Same quality output. 60-80% lower cost.
 
+### Caddy — The Skill That Finds the Right Skill
+
+AI frameworks collect skills faster than anyone actually uses them. You write a skill for URL extraction, another for codebase navigation, another for deep research — and three weeks later you're back to using `WebFetch`, `Grep`, and `WebSearch` because you forgot the specialized tools exist.
+
+**Caddy fixes this.** A non-blocking hook runs on every prompt you submit. It matches your words against a catalog of every skill the framework knows about, and surfaces the one that fits:
+
+```
+You: help me navigate the codebase for the login bug
+[CADDY] /graphify - Turn a codebase into a navigable knowledge graph
+[CADDY] /codebase-reasoning - Load architectural rules + verification doctrine
+
+Claude: Running /graphify first, then we'll map the auth flow...
+```
+
+Like a golf caddy — hands you the right club for the shot, never blocks the swing. Zero errors, zero false-positive cost. Wrong suggestion? Ignored, move on.
+
+**The golf bag stays complete.** When a new skill is added (via `/skills-builder`, manual drop-in, or cloned from another repo), a PostToolUse hook detects it and emits a nudge to run `/caddy-enroll`. That command reads the skill's `SKILL.md`, extracts trigger patterns and use cases, and appends to the index. No maintenance, no drift.
+
+This is one of Titus's defining features — your AI's toolbox actually gets used.
+
 ---
 
 ## 🎨 Make It Yours

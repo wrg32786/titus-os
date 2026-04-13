@@ -1,5 +1,17 @@
 {
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash TITUS_ROOT/daemons/caddy.sh",
+            "timeout": 2000
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "",
@@ -12,6 +24,16 @@
           {
             "type": "command",
             "command": "bash TITUS_ROOT/hooks/auto-capture.sh",
+            "timeout": 2000
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash TITUS_ROOT/daemons/caddy-detect-new-skill.sh",
             "timeout": 2000
           }
         ]
