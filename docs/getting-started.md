@@ -83,6 +83,31 @@ Every session:
 - `system/08_financial_thinking.md` — Adjust financial thresholds
 - `vault/templates/` — Modify note templates to match your style
 
+## Self-Improvement Loop
+
+The framework is designed to learn from mistakes. When Titus makes a mistake, after correcting it, trigger the learning cycle with one sentence:
+
+> **"Reflect on this mistake. Abstract and generalize the learning. Write it to CLAUDE.md."**
+
+The AI will analyze the failure, extract the general pattern, and write a rule following the META format in `CLAUDE.md`. Over time, the framework gets smarter — basic mistakes disappear, conversations elevate to higher-level concerns.
+
+**Where rules go:**
+- Operational mistakes → root `CLAUDE.md`
+- Domain knowledge → new concept note in `vault/concepts/`
+- Behavioral patterns → `system/02_operating_standards.md`
+
+See [[vault/concepts/Self-Improving CLAUDE.md]] for the full rationale.
+
+## Advanced Skills
+
+- **`/open`** and **`/close`** — daily session bookends (included)
+- **`/brief`** — generate structured briefs for delegation (included)
+- **`/decide`** — run a decision through your decision framework (included)
+- **`/deep-recon`** — extended multi-agent reconnaissance for complex research questions (included)
+- **`/semantic-search`** — vector search across the vault (included, requires npm install)
+
+---
+
 ## Troubleshooting
 
 **Hooks not firing:** Make sure the paths in `~/.claude/settings.json` point to your actual titus-os location.

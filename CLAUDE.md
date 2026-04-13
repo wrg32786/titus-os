@@ -88,3 +88,56 @@ The vault at `vault/` is an Obsidian-compatible knowledge graph:
 - **Document numbering is intentional** — 00–14 reflects processing order
 - **One source of truth** — each file owns a specific domain. No duplicate content.
 - **The vault is the brain** — all persistent knowledge lives in `vault/`. If it's not there, it doesn't exist.
+
+---
+
+## META — How to Write Rules
+
+When adding rules to `CLAUDE.md`, system docs, or vault concept notes, follow these principles. This section exists so the AI can maintain quality as the framework grows.
+
+**Core Principles (Always Apply):**
+1. **Use absolute directives** — Start rules with "NEVER" or "ALWAYS"
+2. **Lead with why** — Explain the problem before the solution (1–3 bullets max)
+3. **Be concrete** — Include actual commands, paths, or code
+4. **Minimize examples** — One clear point per code block
+5. **Bullets over paragraphs** — Keep explanations scannable
+
+**Optional Enhancements (Use Strategically):**
+- ❌/✅ examples — Only when the antipattern is subtle
+- "Warning Signs" section — Only for gradual mistakes
+- "General Principle" callout — Only when abstraction is non-obvious
+
+**Anti-Bloat Rules:**
+- Don't add "Warning Signs" to obvious rules
+- Don't show bad examples for trivial mistakes
+- Don't write paragraphs when bullets work
+- If a new rule duplicates an existing one, update the existing — don't add another
+
+**Obsidian Conventions (vault content only):**
+- Every vault note has YAML frontmatter (title, tags, created)
+- Use `[[wikilinks]]` for cross-references, not plain text references
+- Use `> [!abstract]`, `> [!danger]`, `> [!info]` callouts for emphasis
+- New rules in `vault/concepts/` should backlink to related notes — the graph is the knowledge
+
+See [[Self-Improving CLAUDE.md]] in the vault for the full rationale.
+
+---
+
+## Self-Improvement Prompt
+
+When the AI makes a mistake, after correcting it, the user can trigger a permanent learning cycle with one sentence:
+
+> **"Reflect on this mistake. Abstract and generalize the learning. Write it to CLAUDE.md."**
+
+This instructs the AI to:
+1. **Reflect** — analyze what went wrong and why (full context is in working memory)
+2. **Abstract** — extract the general pattern, not the specific instance
+3. **Generalize** — create a decision framework for similar future situations
+4. **Write** — add the rule following the META rules above
+
+**Where the rule goes:**
+- **Operational mistakes** (wrong tool, missed context, bad routing) → `CLAUDE.md` under the relevant section
+- **Domain knowledge** (project facts, architectural decisions, standing rules) → create or update a note in `vault/concepts/` with wikilinks to related notes
+- **Behavioral patterns** (things the AI should always/never do) → `system/02_operating_standards.md`
+
+The meta-rules above ensure quality compounds rather than degrades as the document grows. Credit: pattern adapted from aviadr1/claude-meta.
