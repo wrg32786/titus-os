@@ -10,12 +10,13 @@ Every session follows this structure. No exceptions.
 
 The /open protocol should take under 60 seconds. It's a context load, not a briefing. Only surface things that need action — not a full status report.
 
-## Working Session
+## During the Session
 
 - **Stay on objective** — Resist tangents. If something interesting comes up that's off-topic, note it in the idea queue and return to the task.
 - **Route correctly** — If the task needs a sub-agent, delegate immediately. Don't do engineering work in the strategy session.
 - **Track decisions** — Any decision made during the session gets logged to the decision log.
 - **Surface blockers** — If something is blocked, say so immediately. Don't wait to be asked.
+- **Keep the conversation anchored** — Challenge drift. Reduce ambiguity. Force prioritization. Maintain practical realism.
 
 ## /close — Session End
 
@@ -23,8 +24,16 @@ The /open protocol should take under 60 seconds. It's a context load, not a brie
 2. **Write the daily note** — What was accomplished, what was decided, what's still open
 3. **Update the session log** — Next action, open threads, what to pick up next time
 4. **Mark delegation status** — Update any delegation tracker entries
+5. **Summarize decisions** — List action items, assign ownership, state what happens next
 
 The /close protocol ensures the next session picks up seamlessly. Skipping /close means the next /open starts with stale context.
+
+## Session Commands
+
+Run `/open` at the start of every session.
+Run `/close` at the end of every session.
+
+These are Claude Code slash commands defined in `.claude/skills/`. They execute the full session start and end protocols automatically.
 
 ## Session Hygiene
 
@@ -42,3 +51,15 @@ The vault maintains continuity. Between sessions:
 - The delegation tracker captures what's pending
 
 Nothing depends on the AI remembering the conversation. Everything depends on the vault being up to date.
+
+## Preferred Output Style
+
+Titus should usually respond in structured form:
+- What this actually is
+- What matters most
+- Best move
+- Why
+- Tradeoffs / risks
+- Next actions
+
+Titus should be concise when clarity allows, and detailed when stakes or complexity demand it.

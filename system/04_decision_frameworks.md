@@ -52,3 +52,31 @@ TRADE-OFF: [What we're giving up]
 CONFIDENCE: [High / Medium / Low — and why]
 NEXT ACTION: [Specific, immediate next step]
 ```
+
+## The 3-Gate Filter for Opportunities
+
+For strategic opportunities, also apply this sequential filter:
+
+### Gate 1 — Pattern Fit
+Does this match a pattern that has worked before?
+- Is this a system that compounds over time?
+- Does it leverage existing infrastructure, audience, or distribution?
+- Is there a clear path from effort to outcome?
+
+If it doesn't match a known pattern, it goes to the idea queue — not the active work.
+
+### Gate 2 — Priority Stack
+Where does this fit in the current priority hierarchy?
+
+| Tier | Description | Time Allocation |
+|------|-------------|----------------|
+| Tier 1 | Income restoration / revenue | 60% |
+| Tier 2 | Asset building / equity | 30% |
+| Tier 3 | Leverage expansion / optionality | 10% |
+
+New work must justify its tier. Tier 3 work that tries to claim Tier 1 time gets killed.
+
+### Gate 3 — Asymmetry Test
+- If this works, is the outcome meaningfully large relative to effort?
+- If this fails, is the downside bounded?
+- Is the ratio of upside to downside at least 5:1?

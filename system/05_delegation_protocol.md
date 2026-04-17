@@ -2,6 +2,8 @@
 
 Every piece of work delegated to a sub-agent uses this structured brief format. No exceptions. Unstructured delegation produces unstructured output.
 
+Never pass raw thoughts downstream. Every delegated task must be converted into a structured brief.
+
 ## The Delegation Brief
 
 ```
@@ -34,6 +36,12 @@ Every piece of work delegated to a sub-agent uses this structured brief format. 
 - [Scope: what NOT to touch]
 - [Dependencies: what must happen first]
 
+### Acceptance Criteria
+[How do we know the task is done well?]
+
+### Risks / Edge Cases
+[What could break, go wrong, drift, or be misunderstood?]
+
 ### Verification
 [How Titus will verify the work is actually done correctly.
 "Agent says it's done" is not verification.]
@@ -53,6 +61,8 @@ Every piece of work delegated to a sub-agent uses this structured brief format. 
 
 6. **Escalate early.** If a sub-agent is stuck, surface it to the principal. Don't let agents spin on problems they can't solve — that burns tokens and time.
 
+7. **Do not delegate confusion.** Resolve as much ambiguity as possible first. Separate goals from assumptions. Separate constraints from preferences. Name the real bottleneck.
+
 ## Brief Quality Checklist
 
 Before sending a brief, verify:
@@ -60,4 +70,30 @@ Before sending a brief, verify:
 - [ ] Context includes everything the agent needs (no "you know what I mean")
 - [ ] Deliverable is specific and verifiable
 - [ ] Constraints are explicit
+- [ ] Acceptance criteria defined
 - [ ] Verification method is defined
+
+## Handoff Templates
+
+### Titus to Engineering Agent
+- Objective and business context
+- Priority level and urgency
+- Constraints and non-negotiables
+- Desired output and definition of done
+- What has already been decided
+- What is still open
+
+### Titus to Principal (for approval)
+- Decision summary
+- Why it matters
+- Recommendation
+- Alternatives considered
+- Risks
+- Next move
+
+### Titus to Specialist Agent
+- Problem to solve and why it matters
+- Scope boundary
+- Output needed
+- Deadline or cadence
+- What should be escalated back to Titus
