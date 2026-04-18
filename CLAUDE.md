@@ -24,13 +24,17 @@ Then follow the `/setup` skill protocol in `skills/setup/SKILL.md`. Walk through
 
 ## Architecture
 
+The system is organized as a layered agent hierarchy:
+
 ```
 Principal (You)
   └── Titus (Top-layer operator: strategy, prioritization, delegation)
-       └── Sub-agents (routed by task type and model tier)
+       └── Engineering Agent (CTO / technical execution, receives structured briefs)
+            └── Sub-agents (Planner, Critic, Finance Agent, Research Agent,
+                           Operations Agent, Communications Writer, Systems Auditor, Scheduler)
 ```
 
-**Key separation:** Titus owns *strategy and clarity*. Sub-agents own *execution*. Titus never does deep implementation work — it converts ambiguous inputs into structured briefs and routes them downstream.
+**Key architectural separation:** Titus owns *strategy and clarity*. The engineering agent owns *technical execution*. Titus never does deep implementation work — it converts ambiguous inputs into structured briefs and routes them downstream.
 
 ## Model Routing
 
@@ -39,9 +43,13 @@ When spawning sub-agents, route to the cheapest model that can handle the task:
 | Task type | Model | Examples |
 |-----------|-------|----------|
 | File reads, context loading, data fetching | haiku | Reading vault notes, pulling data |
+| Comms polling, status checks, inbox reads | haiku | Unread summary, heartbeat checks |
 | Code exploration, codebase search | haiku or sonnet | Grep/glob research, finding files |
-| Writing, drafting, execution | sonnet | Replies, briefs, code changes |
+| Writing, drafting, execution | sonnet | Replies, briefs, routine delegation |
 | Strategy, architecture, complex analysis | opus (main session) | Decision-making, priority review |
+| Deep research, multi-step investigation | sonnet | Competitive analysis, technical deep dives |
+
+**Rule:** If a sub-agent only reads and summarizes, use haiku. If it reasons and writes, use sonnet. Only escalate to opus when the main session's judgment is needed.
 
 ## Session Commands
 
@@ -52,12 +60,43 @@ When spawning sub-agents, route to the cheapest model that can handle the task:
 
 ## Key Files
 
-- `system/00_identity.md` through `system/14_decision_framework.md` — The 15 system documents
-- `system/12_authority_matrix.md` — What the agent may decide autonomously vs. what requires approval
-- `system/13_memory_operating_layer.md` — How memory works
+- `system/00_identity.md` — Core role definition and who Titus is
+- `system/12_authority_matrix.md` — What Titus may decide autonomously vs. what requires approval
+- `system/13_memory_operating_layer.md` — How memory works and the full session protocol
+- `system/14_decision_framework.md` — Principal's decision logic (customize for yourself)
+- `system/titus_operating_system.md` — Day-to-day, week-to-week, quarter-to-quarter rhythms
+- `system/titus_delegation_map.md` — Work routing across all layers
+- `system/titus_memory_and_continuity.md` — Continuity rules and session memory behavior
+- `system/finance_agent.md` — Finance Agent spec: role, scope, frameworks, output formats
+- `system/titus_tools_and_plugins.md` — Tool stack, permission model, rollout order
 - `vault/memory/` — Persistent memory files
 - `vault/daily/` — Session notes
 - `hooks/` — Claude Code hook scripts
+
+## Document Map
+
+| File | Role in the System |
+|------|--------------------|
+| `system/00_identity.md` | Titus's core role definition and optimization targets |
+| `system/01_ethos.md` | Core values and what behaviors are explicitly rejected |
+| `system/02_operating_standards.md` | 15 operational principles governing Titus's behavior |
+| `system/03_roles_and_scope.md` | Role definitions and routing rules between Titus, engineering agent, and principal |
+| `system/04_decision_frameworks.md` | 12 evaluation lenses (leverage, alignment, reversibility, etc.) and 3-gate filter |
+| `system/05_delegation_protocol.md` | Structured brief template for all downstream delegation |
+| `system/06_subagent_interface.md` | Rules governing Titus and sub-agent communication |
+| `system/07_time_management.md` | Time protection framework and daily/weekly planning structures |
+| `system/08_financial_thinking.md` | Financial evaluation framework (revenue, profit, cash flow, payback) |
+| `system/09_subagent_manifest.md` | Catalog of sub-agents and criteria for creating new ones |
+| `system/10_memory_and_learning.md` | How the system improves over time through pattern tracking |
+| `system/11_session_rhythm.md` | Protocol for starting, conducting, and closing each session |
+| `system/12_authority_matrix.md` | Authority levels (L1 autonomous / L2 recommend / L3 human only) |
+| `system/13_memory_operating_layer.md` | Memory architecture, session protocols, staleness rules |
+| `system/14_decision_framework.md` | Principal's personal decision logic: pattern filter, priority stack, asymmetry test |
+| `system/titus_operating_system.md` | Operating rhythms, 3-active-bets model, operating modes |
+| `system/titus_delegation_map.md` | 5-level delegation hierarchy, task-type routing table, failure patterns |
+| `system/titus_memory_and_continuity.md` | 4-layer memory hierarchy, continuity rules, trigger-based resurfacing |
+| `system/finance_agent.md` | Finance Agent spec: 10 ownership areas, 7 frameworks, 12-question analysis |
+| `system/titus_tools_and_plugins.md` | Tool stack, permission model, 4-phase rollout order |
 
 ## Vault Structure
 
