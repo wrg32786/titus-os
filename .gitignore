@@ -4,3 +4,4 @@ vault/memory/embeddings.json
 *.log
 .DS_Store
 Thumbs.db
+vault/memory/HEAT_INDEX.json

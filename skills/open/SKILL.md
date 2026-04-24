@@ -18,11 +18,12 @@ Do NOT run the normal /open protocol on an unconfigured system — there's nothi
 
 ## Protocol
 
-1. **Read the latest daily note** — `vault/daily/` sorted by filename descending. This is last session's context.
-2. **Read the session log** — `vault/memory/SESSION_LOG.md`. Get the "Next action" and "Open threads" from the latest entry.
-3. **Read active priorities** — `vault/memory/ACTIVE_PRIORITIES.md`. Current mode, Tier 1 blockers.
-4. **Follow the graph** — From the daily note's open threads, read the 3-5 most relevant vault notes (projects, concepts, agents referenced).
-5. **Check delegation tracker** — `vault/memory/DELEGATION_TRACKER.md`. Anything stale or pending review?
+1. **Load the heat index** — `vault/memory/HEAT_INDEX.json` if it exists. Use the `hot_top_20` array as your prioritized reading list. These are the notes most live in the vault right now (weighted by session reads, backlinks, mtime, with 60-day decay). **Skip cold notes entirely** unless the current session explicitly references them. See `vault/concepts/Memory Decay Doctrine.md`. If the file is missing, fall back to reading everything in steps 2–6.
+2. **Read the latest daily note** — `vault/daily/` sorted by filename descending. This is last session's context.
+3. **Read the session log** — `vault/memory/SESSION_LOG.md`. Get the "Next action" and "Open threads" from the latest entry.
+4. **Read active priorities** — `vault/memory/ACTIVE_PRIORITIES.md`. Current mode, Tier 1 blockers.
+5. **Follow the graph** — From the daily note's open threads, read the 3-5 most relevant vault notes (projects, concepts, agents referenced). Use the heat index from step 1 to tie-break when multiple notes look equally relevant.
+6. **Check delegation tracker** — `vault/memory/DELEGATION_TRACKER.md`. Anything stale or pending review?
 
 ## Output
 

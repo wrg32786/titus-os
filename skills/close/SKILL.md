@@ -33,7 +33,9 @@ Run this at the end of every working session. No sub-agents — do all updates i
 
 5. **Update any vault notes that changed** — If a concept, project, or person note has new information from this session, update it now. Don't defer.
 
-6. **Confirm with the principal:**
+6. **Regenerate the memory heat index** (silent) — `node daemons/memory-heat/compute-heat.js > /dev/null 2>&1`. This refreshes `vault/memory/HEAT_INDEX.json` so the next `/open` has a fresh prioritization signal. Runs in ~2 seconds on a 300-note vault. See `vault/concepts/Memory Decay Doctrine.md`.
+
+7. **Confirm with the principal:**
    - "Here's what I committed. Next session starts with: [next action]. Anything to add?"
 
 ## Rules
