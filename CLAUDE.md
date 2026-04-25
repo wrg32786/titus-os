@@ -75,28 +75,18 @@ When spawning sub-agents, route to the cheapest model that can handle the task:
 
 ## Document Map
 
-| File | Role in the System |
-|------|--------------------|
-| `system/00_identity.md` | Titus's core role definition and optimization targets |
-| `system/01_ethos.md` | Core values and what behaviors are explicitly rejected |
-| `system/02_operating_standards.md` | 15 operational principles governing Titus's behavior |
-| `system/03_roles_and_scope.md` | Role definitions and routing rules between Titus, engineering agent, and principal |
-| `system/04_decision_frameworks.md` | 12 evaluation lenses (leverage, alignment, reversibility, etc.) and 3-gate filter |
-| `system/05_delegation_protocol.md` | Structured brief template for all downstream delegation |
-| `system/06_subagent_interface.md` | Rules governing Titus and sub-agent communication |
-| `system/07_time_management.md` | Time protection framework and daily/weekly planning structures |
-| `system/08_financial_thinking.md` | Financial evaluation framework (revenue, profit, cash flow, payback) |
-| `system/09_subagent_manifest.md` | Catalog of sub-agents and criteria for creating new ones |
-| `system/10_memory_and_learning.md` | How the system improves over time through pattern tracking |
-| `system/11_session_rhythm.md` | Protocol for starting, conducting, and closing each session |
-| `system/12_authority_matrix.md` | Authority levels (L1 autonomous / L2 recommend / L3 human only) |
-| `system/13_memory_operating_layer.md` | Memory architecture, session protocols, staleness rules |
-| `system/14_decision_framework.md` | Principal's personal decision logic: pattern filter, priority stack, asymmetry test |
-| `system/titus_operating_system.md` | Operating rhythms, 3-active-bets model, operating modes |
-| `system/titus_delegation_map.md` | 5-level delegation hierarchy, task-type routing table, failure patterns |
-| `system/titus_memory_and_continuity.md` | 4-layer memory hierarchy, continuity rules, trigger-based resurfacing |
-| `system/finance_agent.md` | Finance Agent spec: 10 ownership areas, 7 frameworks, 12-question analysis |
-| `system/titus_tools_and_plugins.md` | Tool stack, permission model, 4-phase rollout order |
+The full document map (15 numbered system docs + 5 extended specs) lives in `README.md` to avoid duplication. Key files to know:
+
+- `system/00_identity.md` — who Titus is
+- `system/12_authority_matrix.md` — what Titus may decide vs. escalate
+- `system/13_memory_operating_layer.md` — how memory works
+- `system/14_decision_framework.md` — principal's personal decision logic (customize)
+- `system/titus_operating_system.md` — daily/weekly/quarterly rhythms
+- `system/titus_delegation_map.md` — work routing across layers
+- `system/finance_agent.md` — Finance Agent spec
+- `system/titus_tools_and_plugins.md` — tool stack and permission model
+
+For the rest, see `README.md` Architecture section.
 
 ## Vault Structure
 
@@ -111,6 +101,7 @@ The vault at `vault/` is an Obsidian-compatible knowledge graph:
 
 ## Standing Doctrine Notes (in `vault/concepts/`)
 
+- `Common Anti-Patterns.md` — 10 operating rules that prevent common agent failure modes (survey instead of action, multi-option questionnaires, scope creep, etc.). Read on first session.
 - `Self-Improving CLAUDE.md.md` — meta-pattern for rule-writing and capturing mistakes as permanent learning
 - `Caddy.md` — skill routing via a non-blocking hook that matches prompts to skills
 - `Memory Decay Doctrine.md` — notes decay if unused, reinforce if touched; computed `heat_score` per note; ported from tinyhumansai/neocortex

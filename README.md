@@ -51,7 +51,89 @@ After setup, every session works like this:
 - **Work:** Just talk. Titus handles routing, memory, delegation.
 - **End:** `/close` — Saves everything. Next session picks up exactly where you left off.
 
-**Optional:** Open the `vault/` folder in [Obsidian](https://obsidian.md) to see and navigate your AI's knowledge graph visually. Full walkthrough in [Getting Started](docs/getting-started.md).
+**Optional:** Open the `vault/` folder in [Obsidian](https://obsidian.md) to see and navigate your AI's knowledge graph visually. Full walkthrough in [Getting Started](docs/getting-started.md) or the [First Session Walkthrough](docs/first-session-walkthrough.md).
+
+---
+
+## 👀 What a session actually looks like
+
+```text
+You: /open
+
+AI:  3 open threads from yesterday.
+     - Pricing decision pending (you said you'd think on it overnight)
+     - Engineering brief for the auth refactor needs your sign-off
+     - Onboarding flow draft ready for your review
+
+     Active priorities:
+     1. Close the bridge round (blocked on legal review)
+     2. Ship onboarding v2 (in progress, ~70% done)
+     3. Hire #5 engineer (interviews scheduled this week)
+
+     Last session you were heads-down on the onboarding flow.
+     Want to pick that up, or hit one of the open threads first?
+
+You: pricing first. Going with $49 annual, $59 monthly.
+
+AI:  Locked. I'm writing it to vault/concepts/Pricing Strategy.md and
+     logging the decision in DECISION_LOG. Reasoning captured: 17%
+     monthly premium is standard SaaS, annual-pre-pay customers
+     churn 4× less. Want me to also draft the pricing-page copy
+     change for engineering, or is that part of onboarding v2?
+
+You: part of v2.
+
+AI:  Got it. Updating the Onboarding v2 project note. Anything else
+     before we move on?
+
+[... 90 minutes of work ...]
+
+You: /close
+
+AI:  Session captured. Summary written to vault/daily/2026-04-25.md.
+
+     What you decided today:
+     - Pricing: $49/$59 split. Logged.
+     - Onboarding v2: ship Friday, no further scope additions.
+
+     Open threads carrying to next session:
+     - Engineering brief still pending sign-off
+     - Hire #5 — call back to candidate B by Tuesday
+
+     See you tomorrow.
+```
+
+That's the loop. `/open` → work → `/close`. The vault remembers everything. Next session picks up exactly where you left off. See [`vault/examples/`](vault/examples/) for what populated content actually looks like.
+
+---
+
+## 🎯 Who this is for
+
+Titus is built for **principals running complex parallel work** — not for developers building agent pipelines.
+
+- **Solo founders** juggling product, hiring, fundraising, and ops simultaneously.
+- **Technical leads** managing multiple workstreams across teams.
+- **Operators** in any role where the job is to make decisions, route work, and not lose context.
+
+If you've ever closed your laptop on Friday and opened it Monday wondering what the hell you were in the middle of — that's the problem this solves. The AI remembers so you don't have to.
+
+If you're building an agent framework for end-users to consume, you probably want LangChain or CrewAI instead. Titus optimizes for **one principal, many threads, persistent context.**
+
+---
+
+## 🆚 Compared to alternatives
+
+| | titus-os | Plain CLAUDE.md | MemGPT / mem0 | LangChain / CrewAI |
+|---|:---:|:---:|:---:|:---:|
+| Persistent memory across sessions | ✅ | ❌ | ✅ | depends |
+| Human-readable knowledge | ✅ Markdown | ✅ Markdown | ❌ embeddings | ❌ embeddings |
+| Authority / autonomy framework | ✅ | ❌ | ❌ | partial |
+| Sub-agent routing + delegation | ✅ | ❌ | ❌ | ✅ (different shape) |
+| Zero install, zero deps | ✅ | ✅ | ❌ | ❌ |
+| Built for principals, not developers | ✅ | ❌ | ❌ | ❌ |
+| Obsidian-native vault | ✅ | ❌ | ❌ | ❌ |
+
+**The honest tradeoff:** titus-os is opinionated. If you want a flexible toolkit you build on, pick LangChain. If you want a memory layer for an existing AI app, pick mem0. If you want your AI to actually run your operating cadence — `/open`, work, `/close`, week after week — pick this.
 
 ---
 
@@ -192,12 +274,15 @@ Titus is opinionated but built to be forked.
 
 ## 🤝 Contributing
 
-PRs welcome. The highest-value contributions:
+PRs welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for what lands well, what doesn't, and how to write rules that fit the existing style. Highest-value contribution areas:
 
 - Decision framework lenses for new domains
 - Hook scripts for additional Claude Code events
 - Vault templates (engineering, legal, consulting, creative)
 - Integration guides (Notion, Linear, Slack, n8n, Make)
+- Sanitized examples for [`vault/examples/`](vault/examples/)
+
+See [CHANGELOG.md](CHANGELOG.md) for release notes.
 
 ---
 
