@@ -12,7 +12,7 @@
 
 **The personal operating system that operates itself.**
 
-*Your AI doesn't just answer questions — it operates, including operating on itself.*
+*An AI that operates on itself — and a toolbox that manages itself, on top of it.*
 
 [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Key Concepts](#-key-concepts) · [Customize](#-make-it-yours) · [Docs](docs/getting-started.md)
 
