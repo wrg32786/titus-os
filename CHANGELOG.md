@@ -10,6 +10,59 @@ For changes to the kernel itself (the 15 numbered system documents and extended 
 
 (Pending changes for the next release land here.)
 
+## [0.2.2] — 2026-04-27 — "Measurement primitives + adversarial doctrine"
+
+Foundation for the v0.3 measurement release. Six original inventions ship as
+doctrine + skills + scaffolds. None of them depend on v0.3 measurement skills
+to be useful immediately; together they establish the data substrates that
+v0.3 will build on.
+
+### Added
+
+**Adversarial doctrine (principal-side discipline):**
+- `vault/concepts/Reading Agent Output Defensively.md` — companion to `/honesty-check`. Tells the principal how to spot when an agent didn't volunteer the truth. 10 patterns of confident-sounding bullshit + the standard push-back move.
+
+**Cost of Confidence (longitudinal trust calibration):**
+- `vault/concepts/Cost of Confidence.md` — names the pattern: every confident claim that turns out wrong is a trust-decay event.
+- `skills/trust-decay/SKILL.md` — two-phase ledger skill. Phase 1 captures confident claims; Phase 2 resolves them as right or wrong. Pairing is the whole point.
+- `vault/memory/TRUST_DECAY.md` — the ledger file (Open + Resolved sections; auto-managed).
+
+**Common Failure Modes (institutional debugging memory):**
+- `vault/concepts/Common Failure Modes.md` — names the pattern: every confirmed `/diagnose` outcome becomes Phase 1 corpus; recurring patterns graduate to Phase 2 doctrine.
+- `vault/memory/FAILURE_MODES.md` — corpus file (Phase 1 entries + pattern frequency tracker).
+- `skills/diagnose/SKILL.md` — extended with Step 6: write verified diagnosis outcomes to the corpus.
+
+**Honesty Ledger (structured artifact, not just doctrine):**
+- `vault/memory/HONESTY_LEDGER.md` — longitudinal record of `/honesty-check` outputs. Pairs to TRUST_DECAY.md when discrepancies surface.
+- `skills/honesty-check/SKILL.md` — extended to also write a structured machine-readable entry per invocation. Resolution field updated by `/trust-decay resolve` later.
+
+**Attention Reconciliation (drift detection at /open):**
+- `vault/concepts/Attention Reconciliation.md` — the doctrine. Where you said you'd spend attention vs where you actually did, computed every session.
+- `skills/open/SKILL.md` — extended with two new protocol steps:
+  - Step 7: decision aging check (surfaces 30/60/90-day decisions awaiting outcome capture)
+  - Step 8: attention reconciliation (compares last 7 days of daily notes to ACTIVE_PRIORITIES, flags drift > 20%)
+
+**Promote (conversation → durable artifact):**
+- `skills/promote/SKILL.md` — selective elevation skill. Take a slice of the current conversation and produce a vault concept / project / person / decision artifact. Pairs with `/close` (transient) by handling the durable layer.
+
+**Caddy:**
+- `.claude/skill-index.json` — added `/promote` and `/trust-decay` entries with rich triggers.
+
+### Changed
+- `/honesty-check` skill produces both human-readable summary AND machine-readable ledger entry per invocation.
+- `/diagnose` skill writes Phase 1 corpus entries on verified diagnoses.
+- `/open` skill protocol now includes decision aging + attention reconciliation steps before main orientation output.
+
+### Authority reasoning
+All AL1 (additive doctrine + auto-capture extensions to existing skills + scaffold files). No kernel changes; no breaking changes; all measurement layer is data-collection-only at this release. v0.3 will ship the analyzers (`/retro`, `/skill-economics`, `/quality-pulse`) that consume this data.
+
+### What's NOT in this release (deferred to v0.3)
+- `/retro` quarterly analysis skill — needs at least 30 days of TRUST_DECAY + HONESTY_LEDGER + FAILURE_MODES data
+- `/skill-economics` — needs Caddy hint-followed tracking (Caddy improvement queued separately)
+- `/quality-pulse` — Friday three-question survey skill
+- Cadence enforcement hooks (D2 from v0.3 brief)
+- `/missed-cadence` skill (D3)
+
 ## [0.2.1] — 2026-04-26 — "Caddy elevation"
 
 ### Added

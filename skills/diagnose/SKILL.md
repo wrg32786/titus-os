@@ -122,9 +122,30 @@ FIX
    3. If still broken, escalate to L3 (Hooks) — Caddy hook may not be firing
 ```
 
+## Step 6 — Write the outcome to the failure modes corpus (v0.2.2+)
+
+When the diagnosis is verified (the layer + symptom matched the actual cause and the fix worked), append to `vault/memory/FAILURE_MODES.md`:
+
+```markdown
+## YYYY-MM-DD — {short symptom name}
+
+**Symptom (verbatim from principal):** "{their own words}"
+**Layer responsible:** L{N} ({layer name})
+**Specific cause:** {file/line/config that was the actual issue}
+**Fix applied:** {what the principal or agent did}
+**Time to diagnose:** {minutes from /diagnose start to verified cause}
+**Pattern (one line):** {what category of failure this was}
+```
+
+Why: a single failure is data; recurring failures are doctrine. The corpus enables Phase 2 promotion of patterns that occur 3+ times to [[Common Failure Modes]] permanent doctrine. Without the corpus, the framework can't harden against the failures it's actually had.
+
+Skip this step if the diagnosis didn't verify — only confirmed causes get written. Hypotheses that didn't pan out aren't useful corpus data.
+
 ## Why this skill exists
 
 Without `/diagnose`, a user with a broken install has to either dive into the source or give up. The seven-layer model gives them a structured path through the stack — even if they don't fix it themselves, they end up with a precise enough diagnosis to file a useful issue or ask a useful question.
+
+Over time, the corpus this skill builds turns one-off diagnostics into framework hardening — the failure modes the framework has actually hit become the failure modes future principals can recognize in 30 seconds instead of 30 minutes.
 
 ## Anti-patterns this prevents
 
