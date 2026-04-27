@@ -123,8 +123,7 @@ All AL1 (doctrine + non-blocking skills + cross-references). No new behavior; no
 - **Kernel changelog:**
   - `system/CHANGELOG.md` — separate audit trail for kernel changes (higher-stakes than skills/hooks).
 - **Examples:**
-  - `vault/examples/` — populated example notes showing what good vault content looks like.
-  - `docs/first-session-walkthrough.md` — narrative walkthrough for new installs.
+  - `vault/examples/` — example notes showing what good vault content looks like.
   - `vault/concepts/Common Anti-Patterns.md` — operating rules that prevent common agent failure modes.
   - `CONTRIBUTING.md` — contribution guide.
   - "Who this is for" + comparison sections in README.
