@@ -10,7 +10,9 @@
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-00d4aa?style=flat-square)](#-quick-start)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square)](https://github.com/wrg32786/titus-os/pulls)
 
-**Your AI doesn't just answer questions. It operates.**
+**The personal operating system that operates itself.**
+
+*Your AI doesn't just answer questions — it operates, including operating on itself.*
 
 [Quick Start](#-quick-start) · [Architecture](#-architecture) · [Key Concepts](#-key-concepts) · [Customize](#-make-it-yours) · [Docs](docs/getting-started.md)
 
@@ -22,9 +24,9 @@
 
 Every priority. Every decision. Every conversation thread left open from last week. What if it knew exactly what it was allowed to decide on its own — and what to bring to you? What if it could delegate to faster, cheaper agents for grunt work while it stayed focused on strategy?
 
-That's Titus. **15 markdown files that turn Claude Code into a persistent operating system.**
+That's Titus. **A 15-document kernel (plus extended specs) that turns Claude Code into a persistent operating system.**
 
-No database. No server. No build step. Drop the files in, open a session, and your AI boots up knowing who it is, what it's working on, and what matters today.
+No database. No server. No build step. Drop the files in, open a session, and your AI boots up knowing who it is, what it's working on, and what matters today. The system is also recursive — Titus uses its own skills to maintain and publish itself. ([How this repo maintains itself](#-how-this-repo-maintains-itself) · [Manifesto](docs/manifesto.md))
 
 ```
 You: /open
@@ -260,11 +262,31 @@ Titus is opinionated but built to be forked.
 
 ---
 
+## 🔁 How this repo maintains itself
+
+The most differentiating thing about Titus isn't a feature — it's that the framework operates on itself.
+
+When the principal's local Titus learns something new — a sharper rule, a doctrine note, a skill that generalizes — Titus is the one that decides what graduates to the public repo, sanitizes the BMP-private references out of it, drafts the commit message, and opens the pull request. The publish skill is itself one of Titus's skills. The recursive layer is the actual category claim.
+
+**Three pieces make this work:**
+
+1. **Per-file privacy classification.** Every vault note and skill carries a `private: true | false | review` flag in its YAML frontmatter. New files default to `review`, surfacing them at next publish for explicit classification. No directory-based privacy convention to drift out of sync.
+
+2. **Generalization test.** Before any skill graduates from local to public, it runs against a single question: *"would this be useful for at least three radically different principals — say, a SaaS founder, a non-profit director, and a creative production lead?"* If the answer is fewer than three, it stays private.
+
+3. **Publish protocol with secret scanning.** Every publish runs gitleaks (or equivalent) on every file before push. Hard fail on hits. A stray API key in a code block is the kind of mistake that kills credibility instantly — sanitization isn't enough.
+
+**The release log writes itself.** Every Titus-managed release appends to [`RELEASE_LOG.md`](RELEASE_LOG.md): what shipped, what the sanitizer caught, what was held back and why, principal sign-offs at each authority gate. Institutional memory for the publishing process itself.
+
+**You can read it as it happens.** Because the protocol is markdown — readable by you, readable by Titus, readable by any other agent or tool — the recursive layer is *legible*. That's the legibility thesis. ([full manifesto](docs/manifesto.md))
+
+---
+
 ## ❌ What This Isn't
 
 **Not a chatbot skin.** No personality prompts. No "you are a helpful assistant." This is operational infrastructure.
 
-**Not a code framework.** No `npm install`. No Python environment. No build step. It's 15 markdown files.
+**Not a code framework.** No `npm install`. No Python environment. No build step. The kernel is 15 markdown documents (plus a handful of extended specs).
 
 **Not a RAG system.** The vault is human-readable by design. You don't need an AI to search your AI's memory — just open Obsidian.
 
