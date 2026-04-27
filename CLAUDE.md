@@ -20,7 +20,7 @@ Then follow the `/setup` skill protocol in `skills/setup/SKILL.md`. Walk through
 
 ## What This Is
 
-**Titus** is an AI Operating System — a structured framework that defines how an AI agent operates as a strategic advisor and operator. It is a set of 15 markdown documents (00–14) that together form a complete system prompt and operational manual.
+**Titus** is an AI Operating System — a structured framework that defines how an AI agent operates as a strategic advisor and operator. The kernel is 15 numbered documents (00–14) plus a handful of extended specs in `system/` that together form a complete system prompt and operational manual.
 
 ## Architecture
 
@@ -48,6 +48,8 @@ When spawning sub-agents, route to the cheapest model that can handle the task:
 | Writing, drafting, execution | sonnet | Replies, briefs, routine delegation |
 | Strategy, architecture, complex analysis | opus (main session) | Decision-making, priority review |
 | Deep research, multi-step investigation | sonnet | Competitive analysis, technical deep dives |
+
+> **Model identifiers:** `haiku`, `sonnet`, and `opus` refer to the **latest available model in each tier**, not pinned versions. Anthropic ships new model versions periodically; this routing table is intentionally version-agnostic so it survives upgrades. Pin specific model IDs (e.g. `claude-opus-4-7`) only inside skills that depend on a feature available in a specific version. The kernel changelog (`system/CHANGELOG.md`) flags any kernel-level change to model assumptions.
 
 **Rule:** If a sub-agent only reads and summarizes, use haiku. If it reasons and writes, use sonnet. Only escalate to opus when the main session's judgment is needed.
 
