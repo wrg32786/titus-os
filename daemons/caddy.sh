@@ -19,10 +19,15 @@ INDEX="$ROOT/.claude/skill-index.json"
 INPUT=$(cat 2>/dev/null)
 [ -z "$INPUT" ] && exit 0
 
-python3 <<PYEOF 2>/dev/null || exit 0
-import sys, json, re
+# Pass $INPUT and $INDEX via env vars — NOT via raw string interpolation inside
+# the heredoc — so that prompts containing quotes or special chars can't break
+# the Python code. Single-quoted 'PYEOF' prevents all shell expansion inside.
+INPUT="$INPUT" INDEX="$INDEX" python3 <<'PYEOF' 2>/dev/null || exit 0
+import os, sys, json, re
 
-raw = """$INPUT"""
+raw = os.environ.get("INPUT", "")
+index_path = os.environ.get("INDEX", "")
+
 try:
     payload = json.loads(raw) if raw.strip().startswith("{") else {"prompt": raw}
 except Exception:
@@ -33,7 +38,7 @@ if not prompt:
     sys.exit(0)
 
 try:
-    with open("$INDEX", "r", encoding="utf-8") as f:
+    with open(index_path, "r", encoding="utf-8") as f:
         skills = json.load(f)
 except Exception:
     sys.exit(0)
