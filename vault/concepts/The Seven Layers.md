@@ -137,6 +137,21 @@ Each layer sits on top of the one below it. The bottom layer is the most stable;
 
 ---
 
+## Caddy as a cross-layer member
+
+[[Caddy]] is the canonical example of a system that lives across multiple layers — not contained to one. Specifically:
+
+- **Layer 2 (Skills)** — `.claude/skill-index.json` and `/caddy-enroll` skill
+- **Layer 3 (Hooks)** — UserPromptSubmit hook wired in `.claude/settings.json`
+- **Layer 4 (Daemons)** — `daemons/caddy.sh` (the router) and `daemons/caddy-detect-new-skill.sh` (auto-enrollment)
+- **Layer 6 (Doctrine)** — [[Caddy]], [[Suggestion Credibility]], [[The Self-Management Layer]]
+
+This cross-layer footprint is a *feature*. Caddy can't be packaged as a single directory because the pattern only works when the layers cooperate: the index is data (L2), the daemon is automation (L4), the hook is integration (L3), the doctrine is intent (L6). Future contributors should expect cross-layer systems and not try to flatten them.
+
+When debugging anything Caddy-related (use `/diagnose` + `/caddy-explain` + `/caddy-audit`), check all four layers Caddy touches, not just one.
+
+---
+
 ## How layers interact
 
 The lower layers serve the higher ones. The kernel (L1) defines the framework's identity; skills (L2) execute on top of that identity; hooks (L3) automate skill invocation; daemons (L4) maintain the data skills operate on; vault (L5) is the data; doctrine (L6) is the rules the data is interpreted under; principal config (L7) is what makes the framework yours.

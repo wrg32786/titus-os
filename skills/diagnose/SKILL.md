@@ -67,6 +67,8 @@ LAYER 2 — Skills
    - skill-index.json valid?
    - Trigger keywords match the user's actual phrasing? (run /skill-audit Section 3)
    - Skill descriptions match what the skill does?
+   - Caddy fired correctly? Run /caddy-explain on the recent prompt to see the deterministic scoring.
+   - Caddy index drift? Run /caddy-audit to see if any indexed skills are missing from disk or vice versa.
    Check if symptom is "wrong skill firing" or "no skill firing."
 
 LAYER 1 — Kernel
