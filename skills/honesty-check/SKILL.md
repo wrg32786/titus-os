@@ -75,3 +75,44 @@ If a category has nothing in it, omit the line. Do not say "n/a" for every categ
 ## The bar
 
 If the principal later says "wait, you didn't tell me X" — that's a failed honesty check, every time. Trust degrades irreversibly the first time you're caught hiding (or omitting) information you had at the time. Protect it ruthlessly.
+
+## Structured ledger output (v0.2.2+)
+
+When `/honesty-check` runs at the end of a non-trivial task, ALSO append a structured entry to `vault/memory/HONESTY_LEDGER.md` so the data accumulates over time. The doctrine is the discipline; the ledger is the calibration record.
+
+```markdown
+## YYYY-MM-DD — {task summary}
+
+**Session ID:** {timestamp or session reference}
+**Agent:** {self / Atlas / Socrates / Da Vinci / etc.}
+**Task category:** {doc work / code fix / infrastructure / port / refactor / debug / planning}
+
+**Verified:**
+- {item 1}: {how it was verified — observation, type-check, query, log scan}
+
+**Inferred (not directly verified):**
+- {item 1}: {what was assumed and why}
+
+**Guessed (no verification possible at the time):**
+- {item 1}: {what was guessed and the basis}
+
+**Tradeoffs made on principal's behalf:**
+- {tradeoff 1}: {explicit choice, reasoning}
+
+**Stopped short of:**
+- {N/A or specific items}
+
+**Cost/implication to know:**
+- {N/A or specific items}
+
+**Self-rating:** {1-5 on how confident the agent is in the overall delivery}
+**Resolution:** OPEN — awaiting downstream outcome data
+```
+
+The `Resolution` field gets updated later by `/trust-decay resolve` if a discrepancy surfaces — pairing this ledger to the trust-decay one.
+
+Why structured: the ledger feeds `/retro` (v0.3) and the [[Cost of Confidence]] aggregate analysis. Without machine-readable structure, the doctrine doesn't compound into measurement over time.
+
+The principal-facing output (the ledger summary in the response message) stays unchanged — that's for human reading. The structured entry is for longitudinal data.
+
+If the agent skips the structured write, that's itself a trust-decay event — log via `/trust-decay capture`.
