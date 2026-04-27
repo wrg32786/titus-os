@@ -52,7 +52,18 @@ echo "  ✓ CLAUDE.md configured"
 # Handle .claude directory
 mkdir -p "$TARGET/.claude/rules"
 cp -n "$TITUS_TMP/titus-os/.claude/rules/post-compact-critical.md" "$TARGET/.claude/rules/" 2>/dev/null || true
-cp -n "$TITUS_TMP/titus-os/.claude/settings.json.template" "$TARGET/.claude/" 2>/dev/null || true
+
+# Create settings.json from template, replacing TITUS_ROOT placeholder with actual path
+INSTALL_PATH="$(cd "$TARGET" && pwd)"
+SETTINGS_SRC="$TITUS_TMP/titus-os/.claude/settings.json.template"
+SETTINGS_DST="$TARGET/.claude/settings.json"
+if [ ! -f "$SETTINGS_DST" ]; then
+  sed "s|TITUS_ROOT|$INSTALL_PATH|g" "$SETTINGS_SRC" > "$SETTINGS_DST"
+  echo "  ✓ Claude Code settings.json created (TITUS_ROOT → $INSTALL_PATH)"
+else
+  echo "  ✓ Claude Code settings.json already exists — skipping"
+fi
+cp -n "$SETTINGS_SRC" "$TARGET/.claude/" 2>/dev/null || true
 echo "  ✓ Claude Code config ready"
 
 # Install semantic search
