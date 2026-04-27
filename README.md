@@ -262,6 +262,18 @@ Titus is opinionated but built to be forked.
 
 ---
 
+## 🧬 Posture — the principal tunes, doesn't consume
+
+Most AI tools are products you *use*. Titus is a framework you *tune*.
+
+The relationship the principal has with Titus is closer to bio-hacking than to consuming software. Every intervention has a category — supplements (skills, hooks, doctrine), sleep optimization (the open/close loop, memory decay), stack tracking (token usage, session summaries, decision outcomes), restriction (the legibility constraint, the explicit "what I am not building" list), environmental design (the install path, conversational setup), stacks (the seven-layer architecture), protocols (daily/weekly/monthly cadences).
+
+The framework is an organism being performance-engineered, not a product being used. This isn't aspirational positioning — it's the actual disposition the framework demands. Every existing piece of Titus already implies it; the doctrine notes ([[Bio-hacking Posture]], [[What I Am Not Building]], [[Modern AI Infrastructure Stack]]) make it explicit.
+
+If you install Titus expecting it to "just work," it will disappoint you. If you install it ready to tune, measure, restrict, and iterate — it compounds.
+
+---
+
 ## 🔁 How this repo maintains itself
 
 The most differentiating thing about Titus isn't a feature — it's that the framework operates on itself.
