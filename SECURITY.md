@@ -6,15 +6,21 @@ Titus processes operational context — priorities, decisions, business details,
 
 **Do not file public issues for security vulnerabilities.**
 
-Report privately to **wrg32786@users.noreply.github.com** with the subject line `[titus-os security]`.
+Use **GitHub's private vulnerability reporting** for this repo:
 
-Include:
+1. Visit [the Security tab on this repository](https://github.com/wrg32786/titus-os/security/advisories/new)
+2. Click **"Report a vulnerability"**
+3. Fill in the advisory form
+
+This routes directly to the maintainer through GitHub's encrypted channel — no email, no public issue exposure.
+
+Include in the report:
 - A description of the vulnerability and its impact
 - Reproduction steps (or a proof-of-concept)
 - The version / commit SHA you tested against
 - Any suggested mitigation
 
-If you don't get a response within 5 business days, open an issue with a vague subject (`security disclosure pending`) — do not include details — to nudge.
+If GitHub's private reporting isn't available to you for some reason, open an issue with a deliberately vague subject (`security disclosure pending` or similar) and **no details** — the maintainer will reach out through your GitHub profile to set up a private channel.
 
 ## Response Targets
 
