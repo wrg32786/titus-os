@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-blueviolet?style=flat-square)](https://claude.ai/code)
 [![Obsidian](https://img.shields.io/badge/Obsidian-Vault_Native-7C3AED?style=flat-square)](https://obsidian.md)
-[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-00d4aa?style=flat-square)](#-quick-start)
+[![Core: Markdown + Shell](https://img.shields.io/badge/Core-Markdown_%2B_Shell-00d4aa?style=flat-square)](#-quick-start)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square)](https://github.com/wrg32786/titus-os/pulls)
 
 **The personal operating system that operates itself.**
@@ -28,6 +28,8 @@ That's Titus. **A 15-document kernel (plus extended specs) that turns Claude Cod
 
 No database. No server. No build step. Drop the files in, open a session, and your AI boots up knowing who it is, what it's working on, and what matters today. The system is also recursive — Titus uses its own skills to maintain and publish itself. ([How this repo maintains itself](#-how-this-repo-maintains-itself) · [Manifesto](docs/manifesto.md))
 
+> **Dependency model:** The core kernel is markdown + shell — no build step, no database, no server. Optional features (semantic search, hooks automation) require Node.js 18+ and are installed automatically by the installer if Node is present. Obsidian is optional for visual vault navigation.
+
 ```
 You: /open
 Titus: 3 open threads from yesterday. Delegation tracker has 2 items pending review.
@@ -46,14 +48,34 @@ bash <(curl -s https://raw.githubusercontent.com/wrg32786/titus-os/main/install.
 
 That's it. Titus installs into whatever directory you're in — your existing project, your home folder, wherever you work. No new directory to switch to.
 
-**Start a new Claude Code conversation** (or just keep talking). Titus detects the fresh install, greets you, and walks you through setup. No docs to read — just start talking. The AI configures itself through conversation in about 5 minutes.
+The installer handles everything automatically: copies the kernel files, creates `.claude/settings.json` with your actual paths substituted, and installs semantic search if Node.js is available.
 
-After setup, every session works like this:
+**Start a new Claude Code conversation** in the same directory. Titus is live.
+
+Every session works like this:
 - **Start:** `/open` — Titus boots with full context from last session
 - **Work:** Just talk. Titus handles routing, memory, delegation.
 - **End:** `/close` — Saves everything. Next session picks up exactly where you left off.
 
-**Optional:** Open the `vault/` folder in [Obsidian](https://obsidian.md) to see and navigate your AI's knowledge graph visually. Full walkthrough in [Getting Started](docs/getting-started.md) or the [First Session Walkthrough](docs/first-session-walkthrough.md).
+**Optional:** Open the `vault/` folder in [Obsidian](https://obsidian.md) to see and navigate your AI's knowledge graph visually.
+
+Full setup walkthrough: [Getting Started](docs/getting-started.md) · Advanced config: [Advanced Setup](docs/advanced-setup.md)
+
+---
+
+## 🗂 Repo Map
+
+```
+system/     The 15-document operating kernel (00_identity → 14_decision_framework)
+vault/      Persistent memory and knowledge graph (markdown, Obsidian-native)
+skills/     Claude Code slash-command skills (source templates; installed to .claude/skills/)
+hooks/      Automation hook scripts (session summary, token tracking, compact nudge)
+daemons/    Background helpers (Caddy skill router, semantic search, memory-heat)
+docs/       Setup and operating guides
+install.sh  One-line installer
+```
+
+> **Skills path note:** `skills/` in this repo contains source templates. The installer copies them to `.claude/skills/` in your working directory, which is where Claude Code looks for slash commands at runtime. If you add skills manually, place them in `.claude/skills/<name>/SKILL.md`.
 
 ---
 
@@ -131,7 +153,7 @@ If you're building an agent framework for end-users to consume, you probably wan
 | Human-readable knowledge | ✅ Markdown | ✅ Markdown | ❌ embeddings | ❌ embeddings |
 | Authority / autonomy framework | ✅ | ❌ | ❌ | partial |
 | Sub-agent routing + delegation | ✅ | ❌ | ❌ | ✅ (different shape) |
-| Zero install, zero deps | ✅ | ✅ | ❌ | ❌ |
+| No database / server / build step | ✅ | ✅ | ❌ | ❌ |
 | Built for principals, not developers | ✅ | ❌ | ❌ | ❌ |
 | Obsidian-native vault | ✅ | ❌ | ❌ | ❌ |
 
