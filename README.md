@@ -294,6 +294,35 @@ When the principal's local Titus learns something new — a sharper rule, a doct
 
 ---
 
+## 📏 Measurement layer — calibration over time
+
+Most agent frameworks let the AI talk. Almost none measure how often it lies — in the sense of confident-but-wrong, the kind of failure that doesn't crash anything but slowly erodes trust over months until you can't tell whether the framework is helping or just performing.
+
+Titus measures that. Not as a punishment system — as a calibration system. The longitudinal data is the framework's bloodwork.
+
+**Three paired ledgers:**
+
+- **`HONESTY_LEDGER.md`** — every `/honesty-check` invocation writes a structured entry: what was verified, what was inferred, what was guessed, what tradeoffs were made on the principal's behalf, what the agent stopped short of. Doctrine becomes data.
+- **`TRUST_DECAY.md`** — two-phase ledger of confident agent claims and their eventual outcomes. Phase 1 captures the claim ("this is fixed"). Phase 2 resolves it later (held / drifted / reversed). The pairing is the whole point. Calibration = (confirmed correct) / (total claims captured), measured over time, by category.
+- **`FAILURE_MODES.md`** — auto-built corpus from every verified `/diagnose` outcome. Patterns that recur 3+ times graduate to permanent doctrine. The framework hardens against the failures it has actually had.
+
+**Two doctrines that justify the measurement:**
+
+- [`vault/concepts/Cost of Confidence.md`](vault/concepts/Cost%20of%20Confidence.md) — every confident claim that turns out wrong is a trust-decay event. Track them. Most frameworks become unreliable in ways nobody can pinpoint because nobody measures.
+- [`vault/concepts/Reading Agent Output Defensively.md`](vault/concepts/Reading%20Agent%20Output%20Defensively.md) — companion to `/honesty-check` from the principal's side. 10 patterns of confident-sounding bullshit + the standard push-back move.
+
+**Drift detection at session start:**
+
+`/open` runs two reconciliation checks before the normal protocol output:
+- **Decision aging** — for every decision logged 30/60/90 days ago without an outcome captured, surface a one-line prompt. The principal answers in one word; the outcome appends to `DECISION_OUTCOMES.md`.
+- **Attention reconciliation** — last 7 days of daily notes vs `ACTIVE_PRIORITIES.md`. If a Tier 1 project is at <40% of intended share OR a non-priority project consumed >25% of attention, drift is flagged. Forces the principal to either re-prioritize or refocus.
+
+**The bet:** a framework that measures its own calibration compounds. A framework that doesn't, decays. v0.2.2 ships the substrate; v0.3 will ship the analyzers (`/retro`, `/skill-economics`, `/quality-pulse`) that consume it. Until then the data accumulates in the background.
+
+This is the most credible single claim Titus can make versus other personal-OS frameworks: **the first one that measures its own AI's calibration over time.**
+
+---
+
 ## ❌ What This Isn't
 
 **Not a chatbot skin.** No personality prompts. No "you are a helpful assistant." This is operational infrastructure.
